@@ -1,26 +1,376 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ─── FONTS ─────────────────────────────────────────────────────────────── */
+
+/* TWK Lausanne — declared as separate families per weight, matching Webflow */
+@font-face {
+  font-family: "Twklausanne 100";
+  src: url('/fonts/TWKLausanne-100.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Twklausanne 100";
+  src: url('/fonts/TWKLausanne-100Italic.woff') format('woff');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Twklausanne 200";
+  src: url('/fonts/TWKLausanne-200.woff') format('woff');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Twklausanne 200";
+  src: url('/fonts/TWKLausanne-200Italic.woff') format('woff');
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Twklausanne 300";
+  src: url('/fonts/TWKLausanne-300.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Twklausanne 400";
+  src: url('/fonts/TWKLausanne-400.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* PP Editorial New — serif display font */
+@font-face {
+  font-family: Ppeditorialnew;
+  src: url('/fonts/PPEditorialNew-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Ppeditorialnew;
+  src: url('/fonts/PPEditorialNew-Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: Ppeditorialnew;
+  src: url('/fonts/PPEditorialNew-Ultralight.otf') format('opentype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Ppeditorialnew;
+  src: url('/fonts/PPEditorialNew-Ultrabold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ─── DESIGN TOKENS ─────────────────────────────────────────────────────── */
+@theme {
+  /* Colors */
+  --color-lavender:   #ebe7f9;   /* page background, most sections */
+  --color-ink:        #191919;   /* dark text */
+  --color-darkgreen:  #051200;   /* footer, invoy brand values section */
+  --color-forest:     #0b2500;   /* project carousel, CTA panels */
+  --color-beige:      #d8d2c7;   /* case study page background */
+  --color-white:      #ffffff;
+  --color-black:      #000000;
+
+  /* Font families */
+  --font-editorial:  Ppeditorialnew, 'Times New Roman', serif;
+  --font-lausanne:   "Twklausanne 100", Arial, sans-serif;
+  --font-lausanne2:  "Twklausanne 200", Arial, sans-serif;
+}
+
+/* ─── RESPONSIVE ────────────────────────────────────────────────────────── */
+
+/* Hero tagline */
+.ava-hero-tagline {
+  position: absolute;
+  z-index: 2000;
+  mix-blend-mode: difference;
+  top: 320px; /* 100 + 220 — desktop position */
+  left: 32px;
+  width: 400px;
+}
+
+/* Section list rows (Ventures / Legacy Work) */
+.ava-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 60px;
+  padding: 0 32px;
+  border-bottom: 1px solid rgba(0,0,0,0.25);
+  background-color: #ebe7f9;
+}
+.ava-row-meta {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex-shrink: 0;
+}
+.ava-section-header {
+  width: 100%;
+  display: flex;
+  border-bottom: 1px solid rgba(0,0,0,0.25);
+  padding: 20px 32px;
+}
+.ava-section-header-lg {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+.ava-vision-padding {
+  padding: 50px 32px 100px;
+}
+
+/* CTA panels */
+.ava-cta-panels {
+  display: flex;
+  width: 100%;
+  gap: 1px;
+  padding-bottom: 1px;
+}
+
+/* Footer */
+.ava-footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr 1fr;
+  gap: 16px;
+}
+
+/* Carousel */
+.ava-carousel-desktop { display: block; }
+.ava-carousel-mobile  { display: none;  }
+
+/* Vision text */
+.ava-vision-text { font-size: 36px; }
+
+@media (max-width: 767px) {
+  /* Hero tagline — vertically centered, narrower width */
+  .ava-hero-tagline {
+    top: calc(50% - 38px);
+    width: 316px;
   }
+
+  /* Section list rows — stack vertically on mobile */
+  .ava-row {
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 16px 20px;
+  }
+  .ava-row-meta {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0;
+  }
+  .ava-section-header {
+    padding: 20px 20px;
+  }
+  .ava-section-header-lg {
+    padding-top: 50px;
+    padding-bottom: 20px;
+  }
+  .ava-vision-padding {
+    padding: 50px 20px 100px;
+  }
+
+  /* CTA panels — stack vertically */
+  .ava-cta-panels { flex-direction: column; }
+
+  /* Footer — single column */
+  .ava-footer-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .ava-footer-empty { display: none; }
+
+  /* Carousel */
+  .ava-carousel-desktop { display: none;  }
+  .ava-carousel-mobile  { display: block; }
+
+  /* Vision */
+  .ava-vision-text { font-size: 26px; }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ── Case study hero ────────────────────────────────────────────────────── */
+.ava-case-hero {
+  padding: 150px 32px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  align-items: flex-end;
+}
+.ava-case-hero-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+.ava-case-hero-headline {
+  font-size: 60px;
+  width: 640px;
+}
+.ava-case-hero-body {
+  width: 640px;
+}
+
+/* ── Block components ───────────────────────────────────────────────────── */
+.ava-two-col-mix {
+  display: flex;
+  width: 100%;
+  min-height: 600px;
+}
+.ava-two-col-mix-img {
+  flex: 1;
+  position: relative;
+  min-height: 400px;
+}
+.ava-two-col-mix-copy {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 60px 48px;
+}
+.ava-two-col-img {
+  display: flex;
+  width: 100%;
+}
+.ava-pull-quote-wrap {
+  width: 100%;
+  padding: 80px 32px;
+  display: flex;
+  justify-content: center;
+}
+.ava-one-col-wrap {
+  width: 100%;
+  padding: 0 32px;
+  box-sizing: border-box;
+}
+
+@keyframes ava-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (max-width: 767px) {
+  /* Case study hero — stack vertically */
+  .ava-case-hero {
+    padding: 100px 20px 60px;
+    gap: 40px;
+    align-items: flex-start;
+  }
+  .ava-case-hero-meta {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .ava-case-hero-headline { font-size: 36px; width: 100%; }
+  .ava-case-hero-body    { width: 100%; }
+
+  /* Block components */
+  .ava-two-col-mix      { flex-direction: column; min-height: unset; }
+  .ava-two-col-mix-img  { min-height: 210px; order: -1; } /* image always on top */
+  .ava-two-col-mix-copy { padding: 40px 20px; }
+  .ava-two-col-img      { flex-direction: column; }
+  .ava-pull-quote-wrap  { padding: 60px 20px; }
+  .ava-one-col-wrap     { padding: 0 20px; }
+}
+
+/* ─── BASE ──────────────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    background-color: #ebe7f9;
+    color: #191919;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #ebe7f9;
+    color: #191919;
+    font-family: "Twklausanne 100", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+
+  a:hover { color: #191919; }
+
+  ::selection {
+    background-color: #191919;
+    color: #ebe7f9;
+  }
+
+  /* Case study (beige bg) pages */
+  .project-body {
+    background-color: #d8d2c7;
+  }
+
+  /* Case study prose */
+  .prose-case p {
+    color: #191919;
+    font-family: "Twklausanne 100", Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 100;
+    line-height: 22px;
+    letter-spacing: 0.04em;
+    margin-bottom: 1.5rem;
+  }
+  .prose-case p:last-child { margin-bottom: 0; }
+
+  .prose-case h2 {
+    color: #191919;
+    font-family: Ppeditorialnew, 'Times New Roman', serif;
+    font-size: 28px;
+    font-weight: 200;
+    line-height: 110%;
+    margin-top: 3rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .prose-case h3 {
+    color: #191919;
+    font-family: "Twklausanne 200", Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 200;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-top: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .prose-case figure {
+    margin: 2rem 0;
+  }
+  .prose-case figure img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .prose-case hr {
+    border: none;
+    border-top: 1px solid rgba(25,25,25,0.15);
+    margin: 2.5rem 0;
+  }
 }

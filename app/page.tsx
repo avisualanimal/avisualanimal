@@ -1,65 +1,112 @@
-import Image from "next/image";
+import { getFeaturedProjectsMeta } from '@/lib/sanity-queries'
+import ProjectCarousel from '@/components/ProjectCarousel'
+import VenturesSection from '@/components/VenturesSection'
+import LegacyWork from '@/components/LegacyWork'
+import CTASection from '@/components/CTASection'
 
-export default function Home() {
+export default async function HomePage() {
+  const projects = await getFeaturedProjectsMeta()
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div style={{ backgroundColor: '#ebe7f9' }}>
+
+      {/* ── Hero video reel ──────────────────────────────────────────────── */}
+      <section style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
+
+        {/* Tagline — inside hero so calc(50%) resolves against 100vh */}
+        <div className="ava-hero-tagline">
+          <p
+            style={{
+              color: '#fff',
+              fontFamily: 'Ppeditorialnew, "Times New Roman", serif',
+              fontSize: 38,
+              fontWeight: 200,
+              lineHeight: '110%',
+              margin: 0,
+            }}
+          >
+            We create cultural footprints that people fall in love with
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+        >
+          <source src="/videos/reel.mp4" type="video/mp4" />
+          <source src="/videos/reel.webm" type="video/webm" />
+        </video>
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            backgroundColor: 'rgba(0,0,0,0.18)',
+          }}
+        />
+      </section>
+
+      {/* ── Horizontal project carousel (desktop) / vertical stack (mobile) ─ */}
+      <ProjectCarousel projects={projects} />
+
+      {/* ── Vision section ───────────────────────────────────────────────── */}
+      <section
+        style={{
+          backgroundColor: '#ebe7f9',
+          overflow: 'hidden',
+        }}
+      >
+        <div
+          className="ava-vision-padding"
+          style={{
+            maxWidth: 980,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 10,
+          }}
+        >
+          <p
+            style={{
+              fontFamily: '"Twklausanne 200", Arial, sans-serif',
+              fontSize: 12,
+              fontWeight: 200,
+              color: '#191919',
+              margin: 0,
+            }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            VISION
+          </p>
+          <p
+            className="ava-vision-text"
+            style={{
+              fontFamily: '"Twklausanne 100", Arial, sans-serif',
+              fontWeight: 200,
+              lineHeight: '110%',
+              color: '#191919',
+              margin: 0,
+            }}
           >
-            Documentation
-          </a>
+            We back founders with daring ideas others overlook and help them build brands and products from the ground up, seamlessly fusing cultural impact with market disruption.
+          </p>
         </div>
-      </main>
+      </section>
+
+      {/* ── Ventures ─────────────────────────────────────────────────────── */}
+      <VenturesSection />
+
+      {/* ── Legacy Work ──────────────────────────────────────────────────── */}
+      <LegacyWork />
+
+      {/* ── CTAs ─────────────────────────────────────────────────────────── */}
+      <CTASection />
     </div>
-  );
+  )
 }

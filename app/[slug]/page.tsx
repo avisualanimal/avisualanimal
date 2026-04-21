@@ -1,0 +1,94 @@
+import { notFound } from 'next/navigation'
+import type { Metadata } from 'next'
+import { getAllProjectsMeta, getProjectBySlug, type SanityBlock } from '@/lib/sanity-queries'
+import CaseStudyHero from '@/components/CaseStudyHero'
+import CTASection from '@/components/CTASection'
+import FullBleedImageBlock from '@/components/blocks/FullBleedImageBlock'
+import TwoColumnMixBlock from '@/components/blocks/TwoColumnMixBlock'
+import AutoPlayVideoBlock from '@/components/blocks/AutoPlayVideoBlock'
+import PullQuoteBlock from '@/components/blocks/PullQuoteBlock'
+import MarqueeSliderBlock from '@/components/blocks/MarqueeSliderBlock'
+import TwoColumnImageBlock from '@/components/blocks/TwoColumnImageBlock'
+import OneColumnImageBlock from '@/components/blocks/OneColumnImageBlock'
+
+export async function generateStaticParams() {
+  const projects = await getAllProjectsMeta()
+  return projects.map((p) => ({ slug: p.slug }))
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+  const { slug } = await params
+  const project = await getProjectBySlug(slug)
+  if (!project) return {}
+  return { title: project.title, description: project.headline }
+}
+
+function renderBlock(block: SanityBlock) {
+  switch (block._type) {
+    case 'fullBleedImage':
+      return <FullBleedImageBlock key={block._key} imageUrl={block.imageUrl} alt={block.alt} />
+    case 'twoColumnMix':
+      return (
+        <TwoColumnMixBlock
+          key={block._key}
+          imagePosition={block.imagePosition}
+          imageUrl={block.imageUrl}
+          alt={block.alt}
+          header={block.header}
+          body={block.body}
+        />
+      )
+    case 'autoPlayVideo':
+      return <AutoPlayVideoBlock key={block._key} videoUrl={block.videoUrl} caption={block.caption} />
+    case 'pullQuote':
+      return <PullQuoteBlock key={block._key} quote={block.quote} />
+    case 'marqueeSlider':
+      return <MarqueeSliderBlock key={block._key} images={block.images} speed={block.speed} />
+    case 'twoColumnImage':
+      return (
+        <TwoColumnImageBlock
+          key={block._key}
+          imageLeftUrl={block.imageLeftUrl}
+          imageLeftAlt={block.imageLeftAlt}
+          imageRightUrl={block.imageRightUrl}
+          imageRightAlt={block.imageRightAlt}
+        />
+      )
+    case 'oneColumnImage':
+      return <OneColumnImageBlock key={block._key} imageUrl={block.imageUrl} alt={block.alt} />
+    default:
+      return null
+  }
+}
+
+export default async function CaseStudyPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  const project = await getProjectBySlug(slug)
+  if (!project) notFound()
+
+  return (
+    <div style={{ backgroundColor: '#d8d2c7' }}>
+      <CaseStudyHero
+        client={project.client}
+        services={project.services}
+        headline={project.headline}
+        body={project.body}
+      />
+
+      {/* Orderable sections */}
+      <div style={{ paddingTop: '4rem' }}>
+        {project.sections?.map((block) => renderBlock(block))}
+      </div>
+
+      <CTASection />
+    </div>
+  )
+}
