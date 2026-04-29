@@ -1,9 +1,10 @@
-const ventures = [
-  { name: 'Bullet',       category: 'Agentic AI',        status: 'Coming' },
-  { name: 'The X Estate', category: 'Lifestyle Network', status: 'Coming' },
-]
+import type { SanityVenture } from '@/lib/sanity-queries'
 
-export default function VenturesSection() {
+interface Props {
+  ventures: SanityVenture[]
+}
+
+export default function VenturesSection({ ventures }: Props) {
   return (
     <section>
       <div style={{ display: 'flex', flexDirection: 'column', width: '100%', maxWidth: 1440 }}>
@@ -24,7 +25,7 @@ export default function VenturesSection() {
 
         {/* Rows */}
         {ventures.map((v) => (
-          <div key={v.name} className="ava-row">
+          <div key={v._key} className="ava-row">
             <span
               style={{
                 fontFamily: 'Ppeditorialnew, "Times New Roman", serif',

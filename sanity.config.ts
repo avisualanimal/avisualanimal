@@ -14,6 +14,8 @@ import {schema} from './sanity/schemaTypes'
 import {structure} from './sanity/structure'
 
 export default defineConfig({
+  name: 'avisualanimal',
+  title: 'A Visual Animal',
   basePath: '/studio',
   projectId,
   dataset,

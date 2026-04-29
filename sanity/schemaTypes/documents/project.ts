@@ -40,6 +40,12 @@ export const project = defineType({
       validation: (r) => r.required(),
     }),
     defineField({
+      name: 'category',
+      title: 'Category',
+      description: 'Short descriptor shown in the Legacy Work row (e.g. "Health & Wellness")',
+      type: 'string',
+    }),
+    defineField({
       name: 'services',
       title: 'Services',
       type: 'array',

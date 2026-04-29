@@ -7,6 +7,7 @@ export interface SanityProjectMeta {
   slug: string
   title: string
   client: string
+  category?: string
   services: string[]
   headline: string
   coverImage: string | null
@@ -34,13 +35,30 @@ export interface SanityProject extends SanityProjectMeta {
   sections: SanityBlock[]
 }
 
-// ── Queries ───────────────────────────────────────────────────────────────
+export interface SanityVenture {
+  _key: string
+  name: string
+  category: string
+  status: string
+}
+
+export interface SanityHomepage {
+  heroVideoUrl: string | null
+  heroTagline: string
+  visionCopy: string
+  featuredProjects: SanityProjectMeta[]
+  ventures: SanityVenture[]
+  legacyWork: SanityProjectMeta[]
+}
+
+// ── Shared field fragments ────────────────────────────────────────────────
 
 const PROJECT_META_FIELDS = `
   _id,
   title,
   "slug": slug.current,
   client,
+  category,
   services,
   headline,
   "coverImage": coverImage.asset->url,
@@ -89,6 +107,23 @@ const SECTIONS_QUERY = `
     }
   }
 `
+
+// ── Queries ───────────────────────────────────────────────────────────────
+
+export async function getHomepage(): Promise<SanityHomepage | null> {
+  return client.fetch(
+    `*[_type == "homepage" && _id == "homepage"][0] {
+      "heroVideoUrl": heroVideo.asset->url,
+      heroTagline,
+      visionCopy,
+      "featuredProjects": featuredProjects[]-> { ${PROJECT_META_FIELDS} },
+      "ventures": ventures[] { _key, name, category, status },
+      "legacyWork": legacyWork[]-> { ${PROJECT_META_FIELDS} }
+    }`,
+    {},
+    { next: { revalidate: 60 } }
+  )
+}
 
 export async function getAllProjectsMeta(): Promise<SanityProjectMeta[]> {
   return client.fetch(

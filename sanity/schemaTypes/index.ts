@@ -1,6 +1,7 @@
 import { type SchemaTypeDefinition } from 'sanity'
 
 // Documents
+import { homepage } from './documents/homepage'
 import { project } from './documents/project'
 
 // Blocks
@@ -14,6 +15,7 @@ import { oneColumnImage } from './blocks/oneColumnImage'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
+    homepage,
     project,
     fullBleedImage,
     twoColumnMix,

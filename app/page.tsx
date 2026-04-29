@@ -1,11 +1,31 @@
-import { getFeaturedProjectsMeta } from '@/lib/sanity-queries'
+import { getHomepage, getFeaturedProjectsMeta } from '@/lib/sanity-queries'
 import ProjectCarousel from '@/components/ProjectCarousel'
 import VenturesSection from '@/components/VenturesSection'
 import LegacyWork from '@/components/LegacyWork'
 import CTASection from '@/components/CTASection'
 
 export default async function HomePage() {
-  const projects = await getFeaturedProjectsMeta()
+  // Fetch homepage singleton and fall back gracefully if not yet published
+  const [homepage, featuredFallback] = await Promise.all([
+    getHomepage(),
+    // Fallback: use the legacy featured flag on project docs if homepage isn't set up yet
+    getHomepage().then((h) => (h ? null : getFeaturedProjectsMeta())),
+  ])
+
+  const heroTagline =
+    homepage?.heroTagline ?? 'We create cultural footprints that people fall in love with'
+  const heroVideoUrl = homepage?.heroVideoUrl ?? null
+  const visionCopy =
+    homepage?.visionCopy ??
+    'We back founders with daring ideas others overlook and help them build brands and products from the ground up, seamlessly fusing cultural impact with market disruption.'
+
+  const featuredProjects =
+    homepage?.featuredProjects?.length
+      ? homepage.featuredProjects
+      : (featuredFallback ?? [])
+
+  const ventures = homepage?.ventures ?? []
+  const legacyWork = homepage?.legacyWork ?? []
 
   return (
     <div style={{ backgroundColor: '#ebe7f9' }}>
@@ -25,26 +45,35 @@ export default async function HomePage() {
               margin: 0,
             }}
           >
-            We create cultural footprints that people fall in love with
+            {heroTagline}
           </p>
         </div>
 
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          style={{
-            position: 'absolute',
-            inset: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-          }}
-        >
-          <source src="/videos/reel.mp4" type="video/mp4" />
-          <source src="/videos/reel.webm" type="video/webm" />
-        </video>
+        {(heroVideoUrl || !homepage) && (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
+          >
+            {heroVideoUrl ? (
+              <source src={heroVideoUrl} />
+            ) : (
+              <>
+                <source src="/videos/reel.mp4" type="video/mp4" />
+                <source src="/videos/reel.webm" type="video/webm" />
+              </>
+            )}
+          </video>
+        )}
+
         <div
           style={{
             position: 'absolute',
@@ -55,7 +84,7 @@ export default async function HomePage() {
       </section>
 
       {/* ── Horizontal project carousel (desktop) / vertical stack (mobile) ─ */}
-      <ProjectCarousel projects={projects} />
+      <ProjectCarousel projects={featuredProjects} />
 
       {/* ── Vision section ───────────────────────────────────────────────── */}
       <section
@@ -94,16 +123,16 @@ export default async function HomePage() {
               margin: 0,
             }}
           >
-            We back founders with daring ideas others overlook and help them build brands and products from the ground up, seamlessly fusing cultural impact with market disruption.
+            {visionCopy}
           </p>
         </div>
       </section>
 
       {/* ── Ventures ─────────────────────────────────────────────────────── */}
-      <VenturesSection />
+      {ventures.length > 0 && <VenturesSection ventures={ventures} />}
 
       {/* ── Legacy Work ──────────────────────────────────────────────────── */}
-      <LegacyWork />
+      {legacyWork.length > 0 && <LegacyWork projects={legacyWork} />}
 
       {/* ── CTAs ─────────────────────────────────────────────────────────── */}
       <CTASection />

@@ -1,13 +1,11 @@
 import Link from 'next/link'
+import type { SanityProjectMeta } from '@/lib/sanity-queries'
 
-const projects = [
-  { name: 'Invoy',                slug: 'invoy-health',         category: 'Health & Wellness' },
-  { name: 'The Kardashian Apps',  slug: 'the-kardashian-apps',  category: 'Branded Lifestyle Apps' },
-  { name: 'Kimoji',               slug: 'kimoji',               category: 'Viral Consumer App' },
-  { name: 'Microsoft Surface',    slug: 'microsoft-surface',    category: 'Advertising Campaign' },
-]
+interface Props {
+  projects: SanityProjectMeta[]
+}
 
-export default function LegacyWork() {
+export default function LegacyWork({ projects }: Props) {
   return (
     <section>
       <div style={{ display: 'flex', flexDirection: 'column', width: '100%', maxWidth: 1440 }}>
@@ -28,7 +26,7 @@ export default function LegacyWork() {
 
         {/* Rows */}
         {projects.map((p) => (
-          <div key={p.slug} className="ava-row">
+          <div key={p._id} className="ava-row">
             <Link
               href={`/${p.slug}`}
               style={{
@@ -41,7 +39,7 @@ export default function LegacyWork() {
                 textDecoration: 'none',
               }}
             >
-              {p.name}
+              {p.title}
             </Link>
             <div className="ava-row-meta">
               <span
@@ -53,7 +51,7 @@ export default function LegacyWork() {
                   color: '#000',
                 }}
               >
-                {p.category}
+                {p.category ?? p.client}
               </span>
               <Link
                 href={`/${p.slug}`}
