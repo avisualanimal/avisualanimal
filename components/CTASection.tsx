@@ -24,7 +24,7 @@ export default function CTASection() {
   ]
 
   return (
-    <section>
+    <section style={{ backgroundColor: '#ebe7f9' }}>
       <div className="ava-cta-panels">
         {panels.map((p) => (
           <div key={p.category} style={PANEL}>
