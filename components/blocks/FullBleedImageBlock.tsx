@@ -7,12 +7,12 @@ interface Props {
 
 export default function FullBleedImageBlock({ imageUrl, alt }: Props) {
   return (
-    <div style={{ width: '100%', position: 'relative', aspectRatio: '16/9' }}>
+    <div className="ava-full-bleed">
       <Image
         src={imageUrl}
         alt={alt ?? ''}
         fill
-        className="object-cover"
+        style={{ objectFit: 'cover' }}
         sizes="100vw"
       />
     </div>

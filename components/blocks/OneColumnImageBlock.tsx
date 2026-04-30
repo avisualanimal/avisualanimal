@@ -11,10 +11,10 @@ export default function OneColumnImageBlock({ imageUrl, alt }: Props) {
       <Image
         src={imageUrl}
         alt={alt ?? ''}
-        width={1400}
-        height={900}
-        style={{ width: '100%', height: 'auto', display: 'block' }}
-        sizes="(max-width: 767px) calc(100vw - 40px), calc(100vw - 64px)"
+        width={1032}
+        height={654}
+        style={{ width: '100%', height: 'auto', display: 'block', maxWidth: 1032 }}
+        sizes="(max-width: 767px) calc(100vw - 40px), 1032px"
       />
     </div>
   )

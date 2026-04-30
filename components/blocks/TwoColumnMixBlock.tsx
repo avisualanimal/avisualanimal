@@ -28,22 +28,23 @@ const BODY: React.CSSProperties = {
 }
 
 export default function TwoColumnMixBlock({ imagePosition, imageUrl, alt, header, body }: Props) {
+  // Image fills the padded column at natural aspect ratio — no cropping
   const imageCol = (
     <div className="ava-two-col-mix-img">
       <Image
         src={imageUrl}
         alt={alt ?? ''}
-        width={900}
-        height={900}
+        width={633}
+        height={431}
         style={{ width: '100%', height: 'auto', display: 'block' }}
-        sizes="(max-width: 767px) 100vw, 50vw"
+        sizes="(max-width: 767px) calc(100vw - 40px), calc(50vw - 80px)"
       />
     </div>
   )
 
   const copyCol = (
     <div className="ava-two-col-mix-copy">
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 16, maxWidth: 532, width: '100%' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10, width: '100%' }}>
         {header && <p style={HEADER}>{header}</p>}
         <p style={BODY}>{body}</p>
       </div>
@@ -51,7 +52,6 @@ export default function TwoColumnMixBlock({ imagePosition, imageUrl, alt, header
   )
 
   return (
-    // On mobile, image always renders first (top) via CSS column reorder
     <div className="ava-two-col-mix">
       {imagePosition === 'left' ? (
         <>{imageCol}{copyCol}</>
