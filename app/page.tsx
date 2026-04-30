@@ -3,6 +3,7 @@ import ProjectCarousel from '@/components/ProjectCarousel'
 import VenturesSection from '@/components/VenturesSection'
 import LegacyWork from '@/components/LegacyWork'
 import CTASection from '@/components/CTASection'
+import HeroVideo from '@/components/HeroVideo'
 
 export default async function HomePage() {
   // Fetch homepage singleton and fall back gracefully if not yet published
@@ -31,7 +32,7 @@ export default async function HomePage() {
     <div style={{ backgroundColor: '#ebe7f9' }}>
 
       {/* ── Hero video reel ──────────────────────────────────────────────── */}
-      <section style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
+      <section style={{ position: 'relative', height: '100vh', overflow: 'hidden', backgroundColor: '#000' }}>
 
         {/* Tagline — inside hero so calc(50%) resolves against 100vh */}
         <div className="ava-hero-tagline">
@@ -49,30 +50,8 @@ export default async function HomePage() {
           </p>
         </div>
 
-        {(heroVideoUrl || !homepage) && (
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            style={{
-              position: 'absolute',
-              inset: 0,
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-            }}
-          >
-            {heroVideoUrl ? (
-              <source src={heroVideoUrl} />
-            ) : (
-              <>
-                <source src="/videos/reel.mp4" type="video/mp4" />
-                <source src="/videos/reel.webm" type="video/webm" />
-              </>
-            )}
-          </video>
-        )}
+        {/* Video fades in once ready — no flash or pop */}
+        <HeroVideo videoUrl={heroVideoUrl} />
 
         <div
           style={{
