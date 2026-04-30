@@ -104,6 +104,20 @@
   left: 32px;
   width: 400px;
 }
+.ava-hero-tagline p {
+  animation: ava-fade-up 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+}
+
+@keyframes ava-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 /* Section list rows (Ventures / Legacy Work) */
 .ava-row {
