@@ -19,19 +19,6 @@ export const project = defineType({
       options: { source: 'title', maxLength: 96 },
       validation: (r) => r.required(),
     }),
-    defineField({
-      name: 'order',
-      title: 'Order (homepage carousel position)',
-      type: 'number',
-      validation: (r) => r.required().integer().positive(),
-    }),
-    defineField({
-      name: 'featured',
-      title: 'Show in homepage carousel?',
-      type: 'boolean',
-      initialValue: true,
-    }),
-
     // ── Hero / intro ────────────────────────────────────────────────────────
     defineField({
       name: 'client',

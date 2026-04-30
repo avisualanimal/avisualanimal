@@ -11,8 +11,6 @@ export interface SanityProjectMeta {
   services: string[]
   headline: string
   coverImage: string | null
-  order: number
-  featured: boolean
 }
 
 export interface SanityImageAsset {
@@ -61,9 +59,7 @@ const PROJECT_META_FIELDS = `
   category,
   services,
   headline,
-  "coverImage": coverImage.asset->url,
-  order,
-  featured
+  "coverImage": coverImage.asset->url
 `
 
 const SECTIONS_QUERY = `
@@ -127,15 +123,7 @@ export async function getHomepage(): Promise<SanityHomepage | null> {
 
 export async function getAllProjectsMeta(): Promise<SanityProjectMeta[]> {
   return client.fetch(
-    `*[_type == "project"] | order(order asc) { ${PROJECT_META_FIELDS} }`,
-    {},
-    { next: { revalidate: 60 } }
-  )
-}
-
-export async function getFeaturedProjectsMeta(): Promise<SanityProjectMeta[]> {
-  return client.fetch(
-    `*[_type == "project" && featured == true] | order(order asc) { ${PROJECT_META_FIELDS} }`,
+    `*[_type == "project"] | order(_createdAt asc) { ${PROJECT_META_FIELDS} }`,
     {},
     { next: { revalidate: 60 } }
   )

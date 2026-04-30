@@ -1,4 +1,4 @@
-import { getHomepage, getFeaturedProjectsMeta } from '@/lib/sanity-queries'
+import { getHomepage } from '@/lib/sanity-queries'
 import ProjectCarousel from '@/components/ProjectCarousel'
 import VenturesSection from '@/components/VenturesSection'
 import LegacyWork from '@/components/LegacyWork'
@@ -6,12 +6,7 @@ import CTASection from '@/components/CTASection'
 import HeroVideo from '@/components/HeroVideo'
 
 export default async function HomePage() {
-  // Fetch homepage singleton and fall back gracefully if not yet published
-  const [homepage, featuredFallback] = await Promise.all([
-    getHomepage(),
-    // Fallback: use the legacy featured flag on project docs if homepage isn't set up yet
-    getHomepage().then((h) => (h ? null : getFeaturedProjectsMeta())),
-  ])
+  const homepage = await getHomepage()
 
   const heroTagline =
     homepage?.heroTagline ?? 'We create cultural footprints that people fall in love with'
@@ -20,10 +15,7 @@ export default async function HomePage() {
     homepage?.visionCopy ??
     'We back founders with daring ideas others overlook and help them build brands and products from the ground up, seamlessly fusing cultural impact with market disruption.'
 
-  const featuredProjects =
-    homepage?.featuredProjects?.length
-      ? homepage.featuredProjects
-      : (featuredFallback ?? [])
+  const featuredProjects = homepage?.featuredProjects ?? []
 
   const ventures = homepage?.ventures ?? []
   const legacyWork = homepage?.legacyWork ?? []
