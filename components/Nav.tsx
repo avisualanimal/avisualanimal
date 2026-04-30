@@ -10,6 +10,7 @@ export default function Nav() {
       style={{
         mixBlendMode: 'difference',
         padding: '14px 32px 10px',
+        animation: 'ava-fade-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both',
       }}
     >
       <div className="flex justify-between items-end w-full">
