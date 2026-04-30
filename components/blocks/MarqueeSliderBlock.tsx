@@ -15,7 +15,6 @@ interface Props {
 const DURATION = { slow: '40s', normal: '25s', fast: '12s' }
 
 export default function MarqueeSliderBlock({ images, speed = 'normal' }: Props) {
-  // Duplicate for seamless loop
   const items = [...images, ...images]
   const duration = DURATION[speed]
 
@@ -24,7 +23,7 @@ export default function MarqueeSliderBlock({ images, speed = 'normal' }: Props) 
       style={{
         width: '100%',
         overflow: 'hidden',
-        padding: '120px 30px',
+        padding: '120px 0',
         boxSizing: 'border-box',
       }}
     >
@@ -38,23 +37,13 @@ export default function MarqueeSliderBlock({ images, speed = 'normal' }: Props) 
         }}
       >
         {items.map((img, i) => (
-          <div
-            key={i}
-            style={{
-              flexShrink: 0,
-              width: 270,
-              height: 584,
-              borderRadius: 16,
-              border: '1px solid #393939',
-              overflow: 'hidden',
-              position: 'relative',
-            }}
-          >
+          <div key={i} style={{ flexShrink: 0, borderRadius: 16, overflow: 'hidden' }}>
             <Image
               src={img.url}
               alt={img.alt ?? ''}
-              fill
-              style={{ objectFit: 'cover' }}
+              width={270}
+              height={270}
+              style={{ width: '270px', height: 'auto', display: 'block' }}
               sizes="270px"
             />
           </div>
