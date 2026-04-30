@@ -36,7 +36,7 @@ export default function TwoColumnMixBlock({ imagePosition, imageUrl, alt, header
         alt={alt ?? ''}
         width={633}
         height={431}
-        style={{ width: '100%', height: 'auto', display: 'block' }}
+        style={{ maxWidth: '100%', width: 'auto', height: 'auto', display: 'block' }}
         sizes="(max-width: 767px) calc(100vw - 40px), calc(50vw - 80px)"
       />
     </div>
