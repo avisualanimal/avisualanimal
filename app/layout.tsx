@@ -20,6 +20,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        {/* Preload above-the-fold fonts to prevent FOUT on nav + hero */}
+        <link rel="preload" href="/fonts/TWKLausanne-100.woff" as="font" type="font/woff" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/TWKLausanne-200.woff" as="font" type="font/woff" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/PPEditorialNew-Ultralight.otf" as="font" type="font/otf" crossOrigin="anonymous" />
+      </head>
       <body>
         <Nav />
         <main>{children}</main>
