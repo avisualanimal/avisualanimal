@@ -12,7 +12,7 @@ export default function PullQuoteBlock({ quote }: Props) {
           fontWeight: 200,
           lineHeight: '1.1',
           letterSpacing: '-0.01em',
-          color: '#191919',
+          color: '#ffffff',
           maxWidth: 818,
           margin: 0,
           textAlign: 'center',

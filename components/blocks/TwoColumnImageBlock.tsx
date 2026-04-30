@@ -15,21 +15,23 @@ export default function TwoColumnImageBlock({
 }: Props) {
   return (
     <div style={{ display: 'flex', width: '100%' }} className="ava-two-col-img">
-      <div style={{ flex: 1, position: 'relative', minHeight: 500 }}>
+      <div style={{ flex: 1, overflow: 'hidden' }}>
         <Image
           src={imageLeftUrl}
           alt={imageLeftAlt ?? ''}
-          fill
-          className="object-cover"
+          width={900}
+          height={900}
+          style={{ width: '100%', height: 'auto', display: 'block' }}
           sizes="(max-width: 767px) 100vw, 50vw"
         />
       </div>
-      <div style={{ flex: 1, position: 'relative', minHeight: 500 }}>
+      <div style={{ flex: 1, overflow: 'hidden' }}>
         <Image
           src={imageRightUrl}
           alt={imageRightAlt ?? ''}
-          fill
-          className="object-cover"
+          width={900}
+          height={900}
+          style={{ width: '100%', height: 'auto', display: 'block' }}
           sizes="(max-width: 767px) 100vw, 50vw"
         />
       </div>

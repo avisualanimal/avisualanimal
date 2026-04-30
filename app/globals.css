@@ -234,12 +234,9 @@
 .ava-two-col-mix {
   display: flex;
   width: 100%;
-  min-height: 600px;
 }
 .ava-two-col-mix-img {
   flex: 1;
-  position: relative;
-  min-height: 400px;
 }
 .ava-two-col-mix-copy {
   flex: 1;
@@ -283,8 +280,8 @@
   .ava-case-hero-body    { width: 100%; }
 
   /* Block components */
-  .ava-two-col-mix      { flex-direction: column; min-height: unset; }
-  .ava-two-col-mix-img  { min-height: 210px; order: -1; } /* image always on top */
+  .ava-two-col-mix      { flex-direction: column; }
+  .ava-two-col-mix-img  { order: -1; } /* image always on top */
   .ava-two-col-mix-copy { padding: 40px 20px; }
   .ava-two-col-img      { flex-direction: column; }
   .ava-pull-quote-wrap  { padding: 60px 20px; }

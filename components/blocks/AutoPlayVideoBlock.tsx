@@ -11,7 +11,7 @@ export default function AutoPlayVideoBlock({ videoUrl, caption }: Props) {
         loop
         muted
         playsInline
-        style={{ width: '100%', display: 'block', objectFit: 'cover' }}
+        style={{ width: '100%', display: 'block' }}
       >
         <source src={videoUrl} />
       </video>
@@ -21,7 +21,7 @@ export default function AutoPlayVideoBlock({ videoUrl, caption }: Props) {
             fontFamily: '"Twklausanne 100", Arial, sans-serif',
             fontSize: 12,
             fontWeight: 100,
-            color: 'rgba(25,25,25,0.5)',
+            color: 'rgba(255,255,255,0.5)',
             textAlign: 'center',
             padding: '8px 32px',
             margin: 0,

@@ -75,16 +75,19 @@ export default async function CaseStudyPage({
   if (!project) notFound()
 
   return (
-    <div style={{ backgroundColor: '#d8d2c7' }}>
-      <CaseStudyHero
-        client={project.client}
-        services={project.services}
-        headline={project.headline}
-        body={project.body}
-      />
+    <div style={{ backgroundColor: '#051200' }}>
+      {/* Hero — beige background only */}
+      <div style={{ backgroundColor: '#d8d2c7' }}>
+        <CaseStudyHero
+          client={project.client}
+          services={project.services}
+          headline={project.headline}
+          body={project.body}
+        />
+      </div>
 
-      {/* Orderable sections */}
-      <div style={{ paddingTop: '4rem' }}>
+      {/* Orderable sections — transparent, canvas shows through */}
+      <div>
         {project.sections?.map((block) => renderBlock(block))}
       </div>
 

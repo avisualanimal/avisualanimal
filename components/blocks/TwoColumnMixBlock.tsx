@@ -13,7 +13,7 @@ const HEADER: React.CSSProperties = {
   fontSize: 34,
   fontWeight: 200,
   lineHeight: '34px',
-  color: '#191919',
+  color: '#ffffff',
   margin: 0,
 }
 
@@ -23,7 +23,7 @@ const BODY: React.CSSProperties = {
   fontWeight: 200,
   lineHeight: '22px',
   letterSpacing: '0.04em',
-  color: '#191919',
+  color: '#ffffff',
   margin: 0,
 }
 
@@ -33,8 +33,9 @@ export default function TwoColumnMixBlock({ imagePosition, imageUrl, alt, header
       <Image
         src={imageUrl}
         alt={alt ?? ''}
-        fill
-        className="object-cover"
+        width={900}
+        height={900}
+        style={{ width: '100%', height: 'auto', display: 'block' }}
         sizes="(max-width: 767px) 100vw, 50vw"
       />
     </div>

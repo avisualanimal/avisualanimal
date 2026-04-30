@@ -8,15 +8,14 @@ interface Props {
 export default function OneColumnImageBlock({ imageUrl, alt }: Props) {
   return (
     <div className="ava-one-col-wrap">
-      <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9' }}>
-        <Image
-          src={imageUrl}
-          alt={alt ?? ''}
-          fill
-          className="object-cover"
-          sizes="(max-width: 767px) calc(100vw - 40px), calc(100vw - 64px)"
-        />
-      </div>
+      <Image
+        src={imageUrl}
+        alt={alt ?? ''}
+        width={1400}
+        height={900}
+        style={{ width: '100%', height: 'auto', display: 'block' }}
+        sizes="(max-width: 767px) calc(100vw - 40px), calc(100vw - 64px)"
+      />
     </div>
   )
 }

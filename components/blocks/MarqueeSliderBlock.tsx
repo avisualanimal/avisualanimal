@@ -24,6 +24,7 @@ export default function MarqueeSliderBlock({ images, speed = 'normal' }: Props) 
       <div
         style={{
           display: 'flex',
+          alignItems: 'flex-start',
           gap: 16,
           animation: `ava-marquee ${duration} linear infinite`,
           width: 'max-content',
@@ -35,8 +36,6 @@ export default function MarqueeSliderBlock({ images, speed = 'normal' }: Props) 
             style={{
               flexShrink: 0,
               width: 270,
-              height: 488,
-              position: 'relative',
               borderRadius: 8,
               overflow: 'hidden',
             }}
@@ -44,8 +43,9 @@ export default function MarqueeSliderBlock({ images, speed = 'normal' }: Props) 
             <Image
               src={img.url}
               alt={img.alt ?? ''}
-              fill
-              className="object-cover"
+              width={270}
+              height={400}
+              style={{ width: '270px', height: 'auto', display: 'block' }}
               sizes="270px"
             />
           </div>
