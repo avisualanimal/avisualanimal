@@ -179,6 +179,7 @@
   display: grid;
   grid-template-columns: 1fr 1.5fr 1fr 1fr;
   gap: 16px;
+  align-items: start;
 }
 .ava-footer-logo  { order: 0; }
 .ava-footer-about { order: 0; }
