@@ -1,3 +1,8 @@
+'use client'
+
+import { useEffect, useRef } from 'react'
+import gsap from 'gsap'
+
 interface Props {
   client: string
   services: string[]
@@ -26,19 +31,31 @@ const VALUE: React.CSSProperties = {
 }
 
 export default function CaseStudyHero({ client, services, headline, body }: Props) {
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const cols = ref.current?.querySelectorAll<HTMLElement>('.gsap-hero-col')
+    if (!cols?.length) return
+    gsap.fromTo(
+      cols,
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.7, stagger: 0.12, delay: 0.2, ease: 'power2.out' }
+    )
+  }, [])
+
   return (
-    <div className="ava-case-hero">
+    <div className="ava-case-hero" ref={ref}>
       {/* 3-column row: client | services | headline+body */}
       <div className="ava-case-hero-meta">
 
         {/* Client */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, width: 300 }}>
+        <div className="gsap-hero-col" style={{ display: 'flex', flexDirection: 'column', gap: 10, width: 300, opacity: 0 }}>
           <p style={LABEL}>Client</p>
           <p style={VALUE}>{client}</p>
         </div>
 
         {/* Services */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, width: 300 }}>
+        <div className="gsap-hero-col" style={{ display: 'flex', flexDirection: 'column', gap: 10, width: 300, opacity: 0 }}>
           <p style={LABEL}>Services</p>
           <div>
             {services.map((s) => (
@@ -48,7 +65,7 @@ export default function CaseStudyHero({ client, services, headline, body }: Prop
         </div>
 
         {/* Headline + Body — same column so they always share left edge */}
-        <div className="ava-case-hero-right">
+        <div className="gsap-hero-col ava-case-hero-right" style={{ opacity: 0 }}>
           <p
             className="ava-case-hero-headline"
             style={{

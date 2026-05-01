@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { getAllProjectsMeta, getProjectBySlug, type SanityBlock } from '@/lib/sanity-queries'
 import CaseStudyHero from '@/components/CaseStudyHero'
 import CTASection from '@/components/CTASection'
+import ScrollReveal from '@/components/ScrollReveal'
 import FullBleedImageBlock from '@/components/blocks/FullBleedImageBlock'
 import TwoColumnMixBlock from '@/components/blocks/TwoColumnMixBlock'
 import AutoPlayVideoBlock from '@/components/blocks/AutoPlayVideoBlock'
@@ -45,11 +46,23 @@ function renderBlock(block: SanityBlock) {
         />
       )
     case 'autoPlayVideo':
-      return <AutoPlayVideoBlock key={block._key} videoUrl={block.videoUrl} caption={block.caption} />
+      return (
+        <ScrollReveal key={block._key}>
+          <AutoPlayVideoBlock videoUrl={block.videoUrl} caption={block.caption} />
+        </ScrollReveal>
+      )
     case 'pullQuote':
-      return <PullQuoteBlock key={block._key} quote={block.quote} />
+      return (
+        <ScrollReveal key={block._key}>
+          <PullQuoteBlock quote={block.quote} />
+        </ScrollReveal>
+      )
     case 'marqueeSlider':
-      return <MarqueeSliderBlock key={block._key} images={block.images} speed={block.speed} />
+      return (
+        <ScrollReveal key={block._key}>
+          <MarqueeSliderBlock images={block.images} speed={block.speed} />
+        </ScrollReveal>
+      )
     case 'twoColumnImage':
       return (
         <TwoColumnImageBlock
@@ -61,7 +74,11 @@ function renderBlock(block: SanityBlock) {
         />
       )
     case 'oneColumnImage':
-      return <OneColumnImageBlock key={block._key} imageUrl={block.imageUrl} alt={block.alt} />
+      return (
+        <ScrollReveal key={block._key}>
+          <OneColumnImageBlock imageUrl={block.imageUrl} alt={block.alt} />
+        </ScrollReveal>
+      )
     default:
       return null
   }
