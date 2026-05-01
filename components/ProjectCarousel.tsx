@@ -48,12 +48,12 @@ function CardOverlay({ project }: { project: SanityProjectMeta }) {
       <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.1)' }} />
       {/* Title overlay — bottom-left */}
       <div
+        className="ava-carousel-card-copy"
         style={{
           position: 'absolute',
           bottom: 40,
           left: 0,
           right: 0,
-          padding: '0 32px',
           display: 'flex',
           flexDirection: 'column',
           gap: 10,

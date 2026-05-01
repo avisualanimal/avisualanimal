@@ -5,7 +5,6 @@ const PANEL: React.CSSProperties = {
   justifyContent: 'space-between',
   alignItems: 'flex-end',
   width: '100%',
-  padding: '24px 32px 40px',
   gap: 32,
 }
 
@@ -27,7 +26,7 @@ export default function CTASection() {
     <section style={{ backgroundColor: '#ebe7f9' }}>
       <div className="ava-cta-panels">
         {panels.map((p) => (
-          <div key={p.category} style={PANEL}>
+          <div key={p.category} className="ava-cta-panel" style={PANEL}>
             <a href={p.mailto} style={{ textDecoration: 'none' }}>
               <div
                 style={{

@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 export default function Footer() {
   return (
-    <section style={{ backgroundColor: '#051200', padding: '24px 32px' }}>
+    <section className="ava-footer" style={{ backgroundColor: '#051200' }}>
       <div className="ava-footer-grid">
         {/* Logo + copyright */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 80, maxWidth: 300 }}>

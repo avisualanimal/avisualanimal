@@ -162,12 +162,23 @@
   gap: 1px;
   padding-bottom: 1px;
 }
+.ava-cta-panel {
+  padding: 24px 32px 40px;
+}
 
 /* Footer */
+.ava-footer {
+  padding: 24px 32px;
+}
 .ava-footer-grid {
   display: grid;
   grid-template-columns: 1fr 1.5fr 1fr 1fr;
   gap: 16px;
+}
+
+/* Carousel card copy */
+.ava-carousel-card-copy {
+  padding: 0 32px;
 }
 
 /* Carousel */
@@ -208,16 +219,21 @@
     padding: 50px 20px 100px;
   }
 
-  /* CTA panels — stack vertically */
+  /* CTA panels — stack vertically, 20px side padding */
   .ava-cta-panels { flex-direction: column; }
+  .ava-cta-panel  { padding: 24px 20px 40px; }
 
-  /* Footer — single column */
+  /* Footer — single column, 20px side padding */
+  .ava-footer { padding: 24px 20px; }
   .ava-footer-grid {
     display: flex;
     flex-direction: column;
     gap: 20px;
   }
   .ava-footer-empty { display: none; }
+
+  /* Carousel card copy — 20px side padding */
+  .ava-carousel-card-copy { padding: 0 20px; }
 
   /* Carousel */
   .ava-carousel-desktop { display: none;  }
