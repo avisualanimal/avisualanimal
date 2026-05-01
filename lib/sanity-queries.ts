@@ -21,7 +21,7 @@ export interface SanityImageAsset {
 // Block types matching schema names
 export type SanityBlock =
   | { _key: string; _type: 'fullBleedImage';  imageUrl: string; alt?: string }
-  | { _key: string; _type: 'twoColumnMix';    imagePosition: 'left' | 'right'; imageUrl: string; alt?: string; header?: string; body: string }
+  | { _key: string; _type: 'twoColumnMix';    imagePosition: 'left' | 'right'; imageUrl: string; imageWidth: number; imageHeight: number; alt?: string; header?: string; body: string }
   | { _key: string; _type: 'autoPlayVideo';   videoUrl: string; caption?: string }
   | { _key: string; _type: 'pullQuote';       quote: string }
   | { _key: string; _type: 'marqueeSlider';   images: SanityImageAsset[]; speed?: 'slow' | 'normal' | 'fast' }
@@ -73,6 +73,8 @@ const SECTIONS_QUERY = `
     _type == "twoColumnMix" => {
       imagePosition,
       "imageUrl": image.asset->url,
+      "imageWidth": image.asset->metadata.dimensions.width,
+      "imageHeight": image.asset->metadata.dimensions.height,
       alt,
       header,
       body

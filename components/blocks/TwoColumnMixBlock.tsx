@@ -3,6 +3,8 @@ import Image from 'next/image'
 interface Props {
   imagePosition: 'left' | 'right'
   imageUrl: string
+  imageWidth: number
+  imageHeight: number
   alt?: string
   header?: string
   body: string
@@ -27,15 +29,14 @@ const BODY: React.CSSProperties = {
   margin: 0,
 }
 
-export default function TwoColumnMixBlock({ imagePosition, imageUrl, alt, header, body }: Props) {
-  // Image fills the padded column at natural aspect ratio — no cropping
+export default function TwoColumnMixBlock({ imagePosition, imageUrl, imageWidth, imageHeight, alt, header, body }: Props) {
   const imageCol = (
     <div className="ava-two-col-mix-img">
       <Image
         src={imageUrl}
         alt={alt ?? ''}
-        width={0}
-        height={0}
+        width={imageWidth}
+        height={imageHeight}
         style={{ maxWidth: '100%', width: 'auto', height: 'auto', display: 'block' }}
         sizes="(max-width: 767px) calc(100vw - 40px), calc(50vw - 80px)"
       />

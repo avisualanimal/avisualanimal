@@ -37,6 +37,8 @@ function renderBlock(block: SanityBlock) {
           key={block._key}
           imagePosition={block.imagePosition}
           imageUrl={block.imageUrl}
+          imageWidth={block.imageWidth}
+          imageHeight={block.imageHeight}
           alt={block.alt}
           header={block.header}
           body={block.body}
