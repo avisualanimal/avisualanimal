@@ -1,4 +1,4 @@
-import TransitionLink from './TransitionLink'
+import Link from 'next/link'
 import type { SanityProjectMeta } from '@/lib/sanity-queries'
 
 interface Props {
@@ -27,7 +27,7 @@ export default function LegacyWork({ projects }: Props) {
         {/* Rows */}
         {projects.map((p) => (
           <div key={p._id} className="ava-row">
-            <TransitionLink
+            <Link
               href={`/${p.slug}`}
               style={{
                 fontFamily: 'Ppeditorialnew, "Times New Roman", serif',
@@ -40,7 +40,7 @@ export default function LegacyWork({ projects }: Props) {
               }}
             >
               {p.title}
-            </TransitionLink>
+            </Link>
             <div className="ava-row-meta">
               <span
                 style={{
@@ -53,7 +53,7 @@ export default function LegacyWork({ projects }: Props) {
               >
                 {p.category ?? p.client}
               </span>
-              <TransitionLink
+              <Link
                 href={`/${p.slug}`}
                 style={{
                   fontFamily: '"Twklausanne 100", Arial, sans-serif',
@@ -67,7 +67,7 @@ export default function LegacyWork({ projects }: Props) {
                 }}
               >
                 View
-              </TransitionLink>
+              </Link>
             </div>
           </div>
         ))}

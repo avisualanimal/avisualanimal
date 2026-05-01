@@ -1,6 +1,6 @@
 'use client'
 
-import TransitionLink from './TransitionLink'
+import Link from 'next/link'
 import Image from 'next/image'
 
 export default function Nav() {
@@ -15,7 +15,7 @@ export default function Nav() {
     >
       <div className="flex justify-between items-end w-full">
         {/* Logo */}
-        <TransitionLink href="/" aria-label="A Visual Animal — home" className="block">
+        <Link href="/" aria-label="A Visual Animal — home" className="block">
           <div className="relative" style={{ width: 209, height: 25 }}>
             <Image
               src="/AvisualAnimalLogoLight.svg"
@@ -25,7 +25,7 @@ export default function Nav() {
               priority
             />
           </div>
-        </TransitionLink>
+        </Link>
 
         {/* Contact */}
         <a
