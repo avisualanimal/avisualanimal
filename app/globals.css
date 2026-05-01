@@ -95,6 +95,11 @@
 
 /* ─── RESPONSIVE ────────────────────────────────────────────────────────── */
 
+/* Nav */
+.ava-nav {
+  padding: 14px 32px 10px;
+}
+
 /* Hero tagline */
 .ava-hero-tagline {
   position: absolute;
@@ -175,6 +180,9 @@
   grid-template-columns: 1fr 1.5fr 1fr 1fr;
   gap: 16px;
 }
+.ava-footer-logo  { order: 0; }
+.ava-footer-about { order: 0; }
+.ava-footer-social { order: 0; }
 
 /* Carousel card copy */
 .ava-carousel-card-copy {
@@ -189,9 +197,13 @@
 .ava-vision-text { font-size: 36px; }
 
 @media (max-width: 767px) {
-  /* Hero tagline — vertically centered, narrower width */
+  /* Nav */
+  .ava-nav { padding: 14px 20px 10px; }
+
+  /* Hero tagline — vertically centered, 20px left, narrower width */
   .ava-hero-tagline {
     top: calc(50% - 38px);
+    left: 20px;
     width: 316px;
   }
 
@@ -223,14 +235,17 @@
   .ava-cta-panels { flex-direction: column; }
   .ava-cta-panel  { padding: 24px 20px 40px; }
 
-  /* Footer — single column, 20px side padding */
+  /* Footer — single column, 20px side padding, reordered */
   .ava-footer { padding: 24px 20px; }
   .ava-footer-grid {
     display: flex;
     flex-direction: column;
     gap: 20px;
   }
-  .ava-footer-empty { display: none; }
+  .ava-footer-empty  { display: none; }
+  .ava-footer-about  { order: 1; }
+  .ava-footer-social { order: 2; }
+  .ava-footer-logo   { order: 3; }
 
   /* Carousel card copy — 20px side padding */
   .ava-carousel-card-copy { padding: 0 20px; }

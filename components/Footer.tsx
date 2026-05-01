@@ -6,7 +6,7 @@ export default function Footer() {
     <section className="ava-footer" style={{ backgroundColor: '#051200' }}>
       <div className="ava-footer-grid">
         {/* Logo + copyright */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 80, maxWidth: 300 }}>
+        <div className="ava-footer-logo" style={{ display: 'flex', flexDirection: 'column', gap: 80, maxWidth: 300 }}>
           <Link href="/" aria-label="A Visual Animal — home">
             <div className="relative" style={{ width: 210, height: 26 }}>
               <Image
@@ -36,7 +36,7 @@ export default function Footer() {
         <div className="ava-footer-empty" />
 
         {/* About column */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, maxWidth: 300 }}>
+        <div className="ava-footer-about" style={{ display: 'flex', flexDirection: 'column', gap: 10, maxWidth: 300 }}>
           <p
             style={{
               color: 'rgba(255,255,255,0.8)',
@@ -67,7 +67,7 @@ export default function Footer() {
         </div>
 
         {/* Social column */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, maxWidth: 300 }}>
+        <div className="ava-footer-social" style={{ display: 'flex', flexDirection: 'column', gap: 10, maxWidth: 300 }}>
           <p
             style={{
               color: 'rgba(255,255,255,0.8)',

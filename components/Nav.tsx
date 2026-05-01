@@ -6,10 +6,9 @@ import Image from 'next/image'
 export default function Nav() {
   return (
     <div
-      className="fixed top-0 left-0 right-0 z-[1000] flex flex-col items-center"
+      className="ava-nav fixed top-0 left-0 right-0 z-[1000] flex flex-col items-center"
       style={{
         mixBlendMode: 'difference',
-        padding: '14px 32px 10px',
         animation: 'ava-fade-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both',
       }}
     >
