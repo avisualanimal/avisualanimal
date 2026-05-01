@@ -107,7 +107,7 @@
   mix-blend-mode: difference;
   top: 320px; /* 100 + 220 — desktop position */
   left: 32px;
-  width: 400px;
+  width: 580px;
 }
 /* tagline animation now handled by GSAP (HeroTagline.tsx) */
 
