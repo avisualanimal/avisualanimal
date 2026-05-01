@@ -1,9 +1,15 @@
+'use client'
+
+import { useState } from 'react'
+
 interface Props {
   videoUrl: string
   caption?: string
 }
 
 export default function AutoPlayVideoBlock({ videoUrl, caption }: Props) {
+  const [ready, setReady] = useState(false)
+
   return (
     <div style={{ width: '100%' }}>
       <video
@@ -11,7 +17,13 @@ export default function AutoPlayVideoBlock({ videoUrl, caption }: Props) {
         loop
         muted
         playsInline
-        style={{ width: '100%', display: 'block' }}
+        onCanPlay={() => setReady(true)}
+        style={{
+          width: '100%',
+          display: 'block',
+          opacity: ready ? 1 : 0,
+          transition: 'opacity 0.8s ease',
+        }}
       >
         <source src={videoUrl} />
       </video>
