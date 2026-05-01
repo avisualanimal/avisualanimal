@@ -181,8 +181,8 @@
   gap: 16px;
   align-items: start;
 }
-.ava-footer-logo  { order: 0; }
-.ava-footer-about { order: 0; }
+.ava-footer-logo   { order: 0; gap: 80px; }
+.ava-footer-about  { order: 0; }
 .ava-footer-social { order: 0; }
 
 /* Carousel card copy */
@@ -241,12 +241,13 @@
   .ava-footer-grid {
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     gap: 20px;
   }
   .ava-footer-empty  { display: none; }
   .ava-footer-about  { order: 1; }
   .ava-footer-social { order: 2; }
-  .ava-footer-logo   { order: 3; }
+  .ava-footer-logo   { order: 3; gap: 32px; }
 
   /* Carousel card copy — 20px side padding */
   .ava-carousel-card-copy { padding: 0 20px; }

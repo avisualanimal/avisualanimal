@@ -6,7 +6,7 @@ export default function Footer() {
     <section className="ava-footer" style={{ backgroundColor: '#051200' }}>
       <div className="ava-footer-grid">
         {/* Logo + copyright */}
-        <div className="ava-footer-logo" style={{ display: 'flex', flexDirection: 'column', gap: 80, maxWidth: 300 }}>
+        <div className="ava-footer-logo" style={{ display: 'flex', flexDirection: 'column', maxWidth: 300 }}>
           <Link href="/" aria-label="A Visual Animal — home">
             <div className="relative" style={{ width: 210, height: 26 }}>
               <Image
