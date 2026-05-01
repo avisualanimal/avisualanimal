@@ -28,8 +28,9 @@ const VALUE: React.CSSProperties = {
 export default function CaseStudyHero({ client, services, headline, body }: Props) {
   return (
     <div className="ava-case-hero">
-      {/* 3-column row on desktop → stacked on mobile */}
+      {/* 3-column row: client | services | headline+body */}
       <div className="ava-case-hero-meta">
+
         {/* Client */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10, width: 300 }}>
           <p style={LABEL}>Client</p>
@@ -46,40 +47,42 @@ export default function CaseStudyHero({ client, services, headline, body }: Prop
           </div>
         </div>
 
-        {/* Headline */}
-        <p
-          className="ava-case-hero-headline"
-          style={{
-            color: '#191919',
-            fontFamily: '"Twklausanne 200", Arial, sans-serif',
-            fontWeight: 200,
-            lineHeight: '1.1',
-            letterSpacing: '-0.01em',
-            textTransform: 'capitalize',
-            margin: 0,
-          }}
-        >
-          {headline}
-        </p>
-      </div>
+        {/* Headline + Body — same column so they always share left edge */}
+        <div className="ava-case-hero-right">
+          <p
+            className="ava-case-hero-headline"
+            style={{
+              color: '#191919',
+              fontFamily: '"Twklausanne 200", Arial, sans-serif',
+              fontWeight: 200,
+              lineHeight: '1.1',
+              letterSpacing: '-0.01em',
+              textTransform: 'capitalize',
+              margin: 0,
+            }}
+          >
+            {headline}
+          </p>
 
-      {/* Body text */}
-      {body && (
-        <p
-          className="ava-case-hero-body"
-          style={{
-            color: '#191919',
-            fontFamily: '"Twklausanne 200", Arial, sans-serif',
-            fontSize: 18,
-            fontWeight: 200,
-            lineHeight: '22px',
-            letterSpacing: '0.04em',
-            margin: 0,
-          }}
-        >
-          {body}
-        </p>
-      )}
+          {body && (
+            <p
+              className="ava-case-hero-body"
+              style={{
+                color: '#191919',
+                fontFamily: '"Twklausanne 200", Arial, sans-serif',
+                fontSize: 18,
+                fontWeight: 200,
+                lineHeight: '22px',
+                letterSpacing: '0.04em',
+                margin: 0,
+              }}
+            >
+              {body}
+            </p>
+          )}
+        </div>
+
+      </div>
     </div>
   )
 }

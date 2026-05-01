@@ -241,12 +241,14 @@
   align-items: flex-start;
   width: 100%;
 }
+.ava-case-hero-right {
+  width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
 .ava-case-hero-headline {
   font-size: 60px;
-  width: 640px;
-}
-.ava-case-hero-body {
-  width: 640px;
 }
 
 /* ── Tablet: switch hero to 1-column at 1100px ──────────────────────────── */
@@ -260,8 +262,8 @@
     flex-direction: column;
     gap: 24px;
   }
-  .ava-case-hero-headline { font-size: 44px; width: 100%; }
-  .ava-case-hero-body    { width: 100%; }
+  .ava-case-hero-right   { width: 100%; }
+  .ava-case-hero-headline { font-size: 44px; }
 }
 
 /* ── Block components ───────────────────────────────────────────────────── */
@@ -345,8 +347,8 @@
     flex-direction: column;
     gap: 24px;
   }
-  .ava-case-hero-headline { font-size: 36px; width: 100%; }
-  .ava-case-hero-body    { width: 100%; }
+  .ava-case-hero-right   { width: 100%; }
+  .ava-case-hero-headline { font-size: 36px; }
 
   /* Full-bleed — portrait on mobile */
   .ava-full-bleed {
