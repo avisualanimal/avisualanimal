@@ -3,7 +3,11 @@
 import { useRef, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import type { SanityProjectMeta } from '@/lib/sanity-queries'
+
+gsap.registerPlugin(ScrollTrigger)
 
 interface Props {
   projects: SanityProjectMeta[]
@@ -75,57 +79,56 @@ export default function ProjectCarousel({ projects }: Props) {
     const track = trackRef.current
     if (!wrapper || !track) return
 
-    const update = () => {
-      if (window.innerWidth < 768) return
-      const rect = wrapper.getBoundingClientRect()
-      const scrollable = rect.height - window.innerHeight
-      if (scrollable <= 0) return
-      const progress = Math.max(0, Math.min(1, -rect.top / scrollable))
-      const maxTranslate = track.scrollWidth - window.innerWidth
-      track.style.transform = `translateX(${-progress * maxTranslate}px)`
-    }
+    const mm = gsap.matchMedia()
 
-    update()
-    window.addEventListener('scroll', update, { passive: true })
-    window.addEventListener('resize', update, { passive: true })
-    return () => {
-      window.removeEventListener('scroll', update)
-      window.removeEventListener('resize', update)
-    }
+    mm.add('(min-width: 768px)', () => {
+      const ctx = gsap.context(() => {
+        gsap.to(track, {
+          x: () => -(track.scrollWidth - window.innerWidth),
+          ease: 'none',
+          scrollTrigger: {
+            trigger: wrapper,
+            start: 'top top',
+            end: () => `+=${track.scrollWidth - window.innerWidth}`,
+            pin: true,
+            anticipatePin: 1,
+            scrub: 1,
+            invalidateOnRefresh: true,
+          },
+        })
+      }, wrapper)
+
+      return () => ctx.revert()
+    })
+
+    return () => mm.revert()
   }, [])
 
   return (
     <>
-      {/* Desktop: horizontal scroll carousel */}
-      <section ref={wrapperRef} className="ava-carousel-desktop" style={{ width: '100%', paddingBottom: '100vh' }}>
-        <div style={{ width: '100%', height: '130vw', position: 'relative' }}>
-          <div
-            style={{
-              position: 'sticky',
-              top: 0,
-              width: '100%',
-              height: '100vh',
-              marginBottom: '-100vh',
-              overflow: 'hidden',
-              display: 'flex',
-            }}
-          >
+      {/* Desktop: GSAP-pinned horizontal scroll */}
+      <section
+        ref={wrapperRef}
+        className="ava-carousel-desktop"
+        style={{ backgroundColor: '#0b2500' }}
+      >
+        <div
+          ref={trackRef}
+          style={{
+            display: 'flex',
+            height: '100vh',
+            backgroundColor: '#0b2500',
+            willChange: 'transform',
+          }}
+        >
+          {projects.map((project) => (
             <div
-              ref={trackRef}
-              style={{
-                display: 'flex',
-                height: '100%',
-                backgroundColor: '#0b2500',
-                willChange: 'transform',
-              }}
+              key={project.slug}
+              style={{ flexShrink: 0, width: 720, height: '100%', position: 'relative' }}
             >
-              {projects.map((project) => (
-                <div key={project.slug} style={{ flexShrink: 0, width: 720, height: '100%', position: 'relative' }}>
-                  <CardOverlay project={project} />
-                </div>
-              ))}
+              <CardOverlay project={project} />
             </div>
-          </div>
+          ))}
         </div>
       </section>
 

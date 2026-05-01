@@ -109,9 +109,7 @@
   left: 32px;
   width: 400px;
 }
-.ava-hero-tagline p {
-  animation: ava-fade-up 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
-}
+/* tagline animation now handled by GSAP (HeroTagline.tsx) */
 
 @keyframes ava-fade-up {
   from {
