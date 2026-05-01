@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useEffect } from 'react'
-import Link from 'next/link'
+import TransitionLink from './TransitionLink'
 import Image from 'next/image'
 import type { SanityProjectMeta } from '@/lib/sanity-queries'
 
@@ -31,7 +31,7 @@ const CARD_HEADLINE: React.CSSProperties = {
 
 function CardOverlay({ project }: { project: SanityProjectMeta }) {
   return (
-    <Link
+    <TransitionLink
       href={`/${project.slug}`}
       style={{ display: 'block', width: '100%', height: '100%', position: 'relative', textDecoration: 'none' }}
     >
@@ -62,7 +62,7 @@ function CardOverlay({ project }: { project: SanityProjectMeta }) {
         <div style={CARD_TITLE}>{project.title}</div>
         <div style={CARD_HEADLINE}>{project.headline}</div>
       </div>
-    </Link>
+    </TransitionLink>
   )
 }
 

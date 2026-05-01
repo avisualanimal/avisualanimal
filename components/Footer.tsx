@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import TransitionLink from './TransitionLink'
 import Image from 'next/image'
 
 export default function Footer() {
@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="ava-footer-grid">
         {/* Logo + copyright */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 80, maxWidth: 300 }}>
-          <Link href="/" aria-label="A Visual Animal — home">
+          <TransitionLink href="/" aria-label="A Visual Animal — home">
             <div className="relative" style={{ width: 210, height: 26 }}>
               <Image
                 src="/AvisualAnimalLogoLight.svg"
@@ -16,7 +16,7 @@ export default function Footer() {
                 className="object-contain object-left"
               />
             </div>
-          </Link>
+          </TransitionLink>
           <p
             style={{
               color: 'rgba(255,255,255,0.7)',
