@@ -10,13 +10,17 @@ gsap.registerPlugin(ScrollTrigger)
 interface Props {
   imageUrl: string
   alt?: string
+  imageDisplay?: 'cover' | 'contain'
 }
 
-export default function FullBleedImageBlock({ imageUrl, alt }: Props) {
+export default function FullBleedImageBlock({ imageUrl, alt, imageDisplay = 'cover' }: Props) {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const innerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    // Parallax only for cover mode
+    if (imageDisplay !== 'cover') return
+
     const wrapper = wrapperRef.current
     const inner = innerRef.current
     if (!wrapper || !inner) return
@@ -39,8 +43,34 @@ export default function FullBleedImageBlock({ imageUrl, alt }: Props) {
     })
 
     return () => ctx.revert()
-  }, [])
+  }, [imageDisplay])
 
+  // ── Contain mode: show full image at natural size, no fixed height ────────
+  if (imageDisplay === 'contain') {
+    return (
+      <div
+        ref={wrapperRef}
+        style={{
+          width: '100%',
+          backgroundColor: '#051200',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '60px 40px',
+          boxSizing: 'border-box',
+        }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={imageUrl}
+          alt={alt ?? ''}
+          style={{ maxWidth: '100%', height: 'auto', display: 'block' }}
+        />
+      </div>
+    )
+  }
+
+  // ── Cover mode: fixed 800px height with parallax (original behaviour) ─────
   return (
     <div className="ava-full-bleed" ref={wrapperRef}>
       {/* inner div overshoots top/bottom to give parallax room */}

@@ -31,7 +31,7 @@ export async function generateMetadata({
 function renderBlock(block: SanityBlock) {
   switch (block._type) {
     case 'fullBleedImage':
-      return <FullBleedImageBlock key={block._key} imageUrl={block.imageUrl} alt={block.alt} />
+      return <FullBleedImageBlock key={block._key} imageUrl={block.imageUrl} alt={block.alt} imageDisplay={block.imageDisplay} />
     case 'twoColumnMix':
       return (
         <TwoColumnMixBlock
