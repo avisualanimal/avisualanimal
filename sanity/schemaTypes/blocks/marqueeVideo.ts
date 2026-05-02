@@ -1,27 +1,15 @@
 import { defineType, defineField } from 'sanity'
 
-export const marqueeSlider = defineType({
-  name: 'marqueeSlider',
-  title: 'Marquee Slider',
+export const marqueeVideo = defineType({
+  name: 'marqueeVideo',
+  title: 'Marquee Video Slider',
   type: 'object',
   fields: [
     defineField({
-      name: 'images',
-      title: 'Images',
+      name: 'videos',
+      title: 'Videos',
       type: 'array',
-      of: [
-        {
-          type: 'image',
-          options: { hotspot: true },
-          fields: [
-            {
-              name: 'alt',
-              type: 'string',
-              title: 'Alt text',
-            },
-          ],
-        },
-      ],
+      of: [{ type: 'file', options: { accept: 'video/*' } }],
       validation: (r) => r.required().min(2),
     }),
     defineField({
@@ -46,9 +34,9 @@ export const marqueeSlider = defineType({
     }),
   ],
   preview: {
-    select: { images: 'images' },
-    prepare({ images }) {
-      return { title: `Marquee Slider (${images?.length ?? 0} images)` }
+    select: { videos: 'videos' },
+    prepare({ videos }) {
+      return { title: `Marquee Video Slider (${videos?.length ?? 0} videos)` }
     },
   },
 })

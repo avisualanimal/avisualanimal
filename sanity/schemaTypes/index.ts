@@ -10,6 +10,7 @@ import { twoColumnMix } from './blocks/twoColumnMix'
 import { autoPlayVideo } from './blocks/autoPlayVideo'
 import { pullQuote } from './blocks/pullQuote'
 import { marqueeSlider } from './blocks/marqueeSlider'
+import { marqueeVideo } from './blocks/marqueeVideo'
 import { twoColumnImage } from './blocks/twoColumnImage'
 import { oneColumnImage } from './blocks/oneColumnImage'
 
@@ -22,6 +23,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     autoPlayVideo,
     pullQuote,
     marqueeSlider,
+    marqueeVideo,
     twoColumnImage,
     oneColumnImage,
   ],

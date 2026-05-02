@@ -24,7 +24,8 @@ export type SanityBlock =
   | { _key: string; _type: 'twoColumnMix';    imagePosition: 'left' | 'right'; imageUrl: string; imageWidth: number; imageHeight: number; alt?: string; header?: string; body: string }
   | { _key: string; _type: 'autoPlayVideo';   videoUrl: string; caption?: string }
   | { _key: string; _type: 'pullQuote';       quote: string }
-  | { _key: string; _type: 'marqueeSlider';   images: SanityImageAsset[]; speed?: 'slow' | 'normal' | 'fast' }
+  | { _key: string; _type: 'marqueeSlider';   images: SanityImageAsset[]; speed?: 'slow' | 'normal' | 'fast'; roundedCorners?: boolean }
+  | { _key: string; _type: 'marqueeVideo';    videos: string[]; speed?: 'slow' | 'normal' | 'fast'; roundedCorners?: boolean }
   | { _key: string; _type: 'twoColumnImage';  imageLeftUrl: string; imageLeftAlt?: string; imageRightUrl: string; imageRightAlt?: string }
   | { _key: string; _type: 'oneColumnImage';  imageUrl: string; alt?: string }
 
@@ -92,7 +93,13 @@ const SECTIONS_QUERY = `
         "url": asset->url,
         alt
       },
-      speed
+      speed,
+      roundedCorners
+    },
+    _type == "marqueeVideo" => {
+      "videos": videos[].asset->url,
+      speed,
+      roundedCorners
     },
     _type == "twoColumnImage" => {
       "imageLeftUrl": imageLeft.asset->url,

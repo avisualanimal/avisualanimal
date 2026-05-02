@@ -9,6 +9,7 @@ import TwoColumnMixBlock from '@/components/blocks/TwoColumnMixBlock'
 import AutoPlayVideoBlock from '@/components/blocks/AutoPlayVideoBlock'
 import PullQuoteBlock from '@/components/blocks/PullQuoteBlock'
 import MarqueeSliderBlock from '@/components/blocks/MarqueeSliderBlock'
+import MarqueeVideoBlock from '@/components/blocks/MarqueeVideoBlock'
 import TwoColumnImageBlock from '@/components/blocks/TwoColumnImageBlock'
 import OneColumnImageBlock from '@/components/blocks/OneColumnImageBlock'
 
@@ -60,7 +61,13 @@ function renderBlock(block: SanityBlock) {
     case 'marqueeSlider':
       return (
         <ScrollReveal key={block._key}>
-          <MarqueeSliderBlock images={block.images} speed={block.speed} />
+          <MarqueeSliderBlock images={block.images} speed={block.speed} roundedCorners={block.roundedCorners} />
+        </ScrollReveal>
+      )
+    case 'marqueeVideo':
+      return (
+        <ScrollReveal key={block._key}>
+          <MarqueeVideoBlock videos={block.videos} speed={block.speed} roundedCorners={block.roundedCorners} />
         </ScrollReveal>
       )
     case 'twoColumnImage':

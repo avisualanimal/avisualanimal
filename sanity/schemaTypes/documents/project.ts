@@ -69,6 +69,7 @@ export const project = defineType({
         { type: 'autoPlayVideo' },
         { type: 'pullQuote' },
         { type: 'marqueeSlider' },
+        { type: 'marqueeVideo' },
         { type: 'twoColumnImage' },
         { type: 'oneColumnImage' },
       ],

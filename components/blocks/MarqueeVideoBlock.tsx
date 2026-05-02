@@ -1,22 +1,15 @@
 'use client'
 
-import Image from 'next/image'
-
-interface SliderImage {
-  url: string
-  alt?: string
-}
-
 interface Props {
-  images: SliderImage[]
+  videos: string[]
   speed?: 'slow' | 'normal' | 'fast'
   roundedCorners?: boolean
 }
 
 const DURATION = { slow: '40s', normal: '25s', fast: '12s' }
 
-export default function MarqueeSliderBlock({ images, speed = 'normal', roundedCorners = false }: Props) {
-  const items = [...images, ...images]
+export default function MarqueeVideoBlock({ videos, speed = 'normal', roundedCorners = false }: Props) {
+  const items = [...videos, ...videos]
   const duration = DURATION[speed]
   const radius = roundedCorners ? 16 : 0
 
@@ -38,15 +31,15 @@ export default function MarqueeSliderBlock({ images, speed = 'normal', roundedCo
           width: 'max-content',
         }}
       >
-        {items.map((img, i) => (
+        {items.map((url, i) => (
           <div key={i} style={{ flexShrink: 0, borderRadius: radius, overflow: 'hidden' }}>
-            <Image
-              src={img.url}
-              alt={img.alt ?? ''}
-              width={270}
-              height={270}
+            <video
+              src={url}
+              autoPlay
+              muted
+              loop
+              playsInline
               style={{ width: '270px', height: 'auto', display: 'block' }}
-              sizes="270px"
             />
           </div>
         ))}
