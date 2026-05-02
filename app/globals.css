@@ -192,6 +192,10 @@
 .ava-carousel-desktop { display: block; }
 .ava-carousel-mobile  { display: none;  }
 
+/* Desktop / mobile visibility toggles */
+.ava-desktop-only { display: block; }
+.ava-mobile-only  { display: none;  }
+
 /* Vision text */
 .ava-vision-text { font-size: 36px; }
 
@@ -381,20 +385,21 @@
   .ava-case-hero-right   { width: 100%; }
   .ava-case-hero-headline { font-size: 36px; }
 
-  /* Full-bleed — portrait on mobile */
-  .ava-full-bleed {
-    height: auto;
-    aspect-ratio: 794 / 993;
-  }
+  /* Full-bleed — desktop wrapper hidden, mobile <img> renders naturally */
+  .ava-full-bleed { height: auto; }
 
   /* 2-column mix — stack vertically, image always on top */
   .ava-two-col-mix      { flex-direction: column; }
   .ava-two-col-mix-img  { flex: none; width: 100%; padding: 80px 20px; order: -1; }
   .ava-two-col-mix-copy { flex: none; width: 100%; padding: 80px 20px; }
 
-  /* 2-column image — stack, portrait ratio */
-  .ava-two-col-img       { flex-direction: column; }
-  .ava-two-col-img-cell  { flex: none; width: 100%; height: auto; aspect-ratio: 794 / 993; }
+  /* 2-column image — desktop wrapper hidden, mobile <img> renders naturally */
+  .ava-two-col-img      { flex-direction: column; }
+  .ava-two-col-img-cell { flex: none; width: 100%; height: auto; }
+
+  /* Desktop / mobile visibility toggles */
+  .ava-desktop-only { display: none;  }
+  .ava-mobile-only  { display: block; }
 
   /* Pull quote */
   .ava-pull-quote-wrap  { padding: 80px 20px; }
@@ -410,6 +415,7 @@
     background-color: #ebe7f9;
     color: #191919;
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {

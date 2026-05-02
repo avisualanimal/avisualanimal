@@ -18,38 +18,41 @@ export default function FullBleedImageBlock({ imageUrl, alt, imageDisplay = 'cov
   const innerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    // Parallax only for cover mode
+    // Parallax only for cover mode on desktop
     if (imageDisplay !== 'cover') return
 
     const wrapper = wrapperRef.current
     const inner = innerRef.current
     if (!wrapper || !inner) return
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        inner,
-        { yPercent: -8 },
-        {
-          yPercent: 8,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: wrapper,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true,
-          },
-        }
-      )
+    const mm = gsap.matchMedia()
+    mm.add('(min-width: 768px)', () => {
+      const ctx = gsap.context(() => {
+        gsap.fromTo(
+          inner,
+          { yPercent: -8 },
+          {
+            yPercent: 8,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: wrapper,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: true,
+            },
+          }
+        )
+      })
+      return () => ctx.revert()
     })
 
-    return () => ctx.revert()
+    return () => mm.revert()
   }, [imageDisplay])
 
   // ── Contain mode: show full image at natural size, no fixed height ────────
   if (imageDisplay === 'contain') {
     return (
       <div
-        ref={wrapperRef}
         style={{
           width: '100%',
           backgroundColor: '#051200',
@@ -70,28 +73,40 @@ export default function FullBleedImageBlock({ imageUrl, alt, imageDisplay = 'cov
     )
   }
 
-  // ── Cover mode: fixed 800px height with parallax (original behaviour) ─────
+  // ── Cover mode: desktop = fixed 800px + parallax, mobile = natural img ────
   return (
-    <div className="ava-full-bleed" ref={wrapperRef}>
-      {/* inner div overshoots top/bottom to give parallax room */}
-      <div
-        ref={innerRef}
-        style={{
-          position: 'absolute',
-          left: 0,
-          right: 0,
-          top: '-8%',
-          height: '116%',
-        }}
-      >
-        <Image
+    <>
+      {/* Desktop: parallax */}
+      <div className="ava-full-bleed ava-desktop-only" ref={wrapperRef}>
+        <div
+          ref={innerRef}
+          style={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            top: '-8%',
+            height: '116%',
+          }}
+        >
+          <Image
+            src={imageUrl}
+            alt={alt ?? ''}
+            fill
+            style={{ objectFit: 'cover' }}
+            sizes="100vw"
+          />
+        </div>
+      </div>
+
+      {/* Mobile: natural dimensions, no cropping */}
+      <div className="ava-mobile-only">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src={imageUrl}
           alt={alt ?? ''}
-          fill
-          style={{ objectFit: 'cover' }}
-          sizes="100vw"
+          style={{ width: '100%', height: 'auto', display: 'block' }}
         />
       </div>
-    </div>
+    </>
   )
 }
