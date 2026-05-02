@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import ScrollToTop from '@/components/ScrollToTop'
 
 export const metadata: Metadata = {
   title: {
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preload" href="/fonts/PPEditorialNew-Ultralight.otf" as="font" type="font/otf" crossOrigin="anonymous" />
       </head>
       <body>
+        <ScrollToTop />
         <Nav />
         <main>{children}</main>
         <Footer />
